@@ -1,14 +1,15 @@
+const { Int32 } = require('mongodb');
 const mongoose = require('mongoose');
 
 const registerSchema = new mongoose.Schema({
     registerId: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    type: Int32,
+    primaryKey: true,
+    autoIncrement: true,
+  },
     name: {
         type: String,
-        reuired: true,
+        required: true,
         trim: true
     },
     email: {

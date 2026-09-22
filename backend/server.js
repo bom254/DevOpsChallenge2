@@ -2,16 +2,23 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static('frontend'));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/register', require('./routes/event.route'));
+
+// Register Endpoint
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'html', 'index.html'));
+})
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
