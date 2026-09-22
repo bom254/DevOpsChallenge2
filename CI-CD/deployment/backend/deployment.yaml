@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: backend
+  namespace: app
+spec:
+  replicas: 2
+  selector:
+    matchlabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: b00mgr3rt/eventhub-backend:latest
+          ports:
+          - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 5010
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 5010
+            initialDelaySeconds: 10
+            periodSeconds: 10
