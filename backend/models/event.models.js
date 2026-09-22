@@ -6,7 +6,7 @@ const registerSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    fullName: {
+    name: {
         type: String,
         reuired: true,
         trim: true
@@ -21,4 +21,4 @@ const registerSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Register', registerSchema);
+module.exports = mongoose.model('Registration', registerSchema);
