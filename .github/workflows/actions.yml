@@ -1,0 +1,7 @@
+name: GitOps pipeline with monitoring, observability, and alerting
+
+on: 
+  push:
+    branches:
+      - main
+  
