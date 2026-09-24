@@ -4,4 +4,21 @@ on:
   push:
     branches:
       - main
-  
+
+env:
+  PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+  ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
+  ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout-code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
