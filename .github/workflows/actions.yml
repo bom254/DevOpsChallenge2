@@ -22,3 +22,11 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
+
+      - name: Set up NodeJs
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install NodeJs dependencies
+        run: npm install
