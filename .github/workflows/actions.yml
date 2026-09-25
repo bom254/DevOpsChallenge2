@@ -35,14 +35,15 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/eventhub-backend:latest ./backend
 
-      - name: Trivy Installation
-        run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.74.0 \
-          trivy --version
+      # - name: Trivy Installation
+      #   run: |
+      #     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.74.0 \
+      #     trivy --version
 
       - name: Scan Docker image with Trivy
         run: |
-          trivy image --severity HIGH,CRITICAL --no-progress --skip-db-update --formart table -o trivy-report.txt ${{ secrets.DOCKERHUB_USERNAME }}/eventhub-backend:latest 
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity HIGH,CRITICAL --no-progress --formart table -o trivy-report.txt ${{ secrets.DOCKERHUB_USERNAME }}/eventhub-backend:latest 
+          
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # this is the magic
