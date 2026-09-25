@@ -42,8 +42,11 @@ jobs:
 
       - name: Scan Docker image with Trivy
         run: |
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity HIGH,CRITICAL --no-progress --formart table -o trivy-report.txt ${{ secrets.DOCKERHUB_USERNAME }}/eventhub-backend:latest 
-          
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image  ${{ secrets.DOCKERHUB_USERNAME }}/eventhub-backend:latest 
+
+      - name: Login in to DockerHub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin   
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # this is the magic
