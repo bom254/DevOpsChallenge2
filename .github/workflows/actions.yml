@@ -33,7 +33,7 @@ jobs:
 
       - name: Docker build Image on the backend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/eventhub-backend:latest ./backend
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/eventhub-backend:latest ./backend
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # this is the magic
