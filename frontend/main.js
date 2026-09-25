@@ -25,7 +25,7 @@ form.addEventListener('submit', async (event) => {
     submitBtn.textContent = 'Registering…';
 
     try {
-        const response = await fetch('http://localhost:5004/api/register', {
+        const response = await fetch('https://devopschallenge2.onrender.com/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email })
