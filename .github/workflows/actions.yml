@@ -34,5 +34,5 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # this is the magic
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub Actions runner automatically creates a GITHUB_TOKEN secret to use in your workflow
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # GitHub Actions runner automatically creates a GITHUB_TOKEN secret to use in your workflow
           publish_dir: ./build
