@@ -81,11 +81,20 @@ jobs:
           chmod +x argocd
           sudo mv argocd /usr/local/bin/argocd
 
+      - name: Deployment of the frontend
+        run: | 
+          kubectl apply -f CI-CD/deployment/frontend/deployment.yaml
+          kubectl apply -f CI-CD/deployment/frontend/service.yaml
+          sleep 20
+          kubectl get pods all
+
       - name: Login to ArgoCD
         env:
           ARGOCD_OPTS: "--grpc-web --insecure"
         run: |
           argocd login ${{ secrets.ARGOCD_SERVER }} --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
+
+      - name: 
 
       - name: Sync ArgoCD Application
         run: |
